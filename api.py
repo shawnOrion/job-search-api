@@ -22,6 +22,8 @@ app = FastAPI()
 async def job_options(title: str):
     n = 10
     job_ids = search_jobs(title=title)
+    # find 10 reandom job ids
+    random.shuffle(job_ids)
     job_ids = job_ids[:n]
     job_profiles = []
     for job_id in job_ids:
