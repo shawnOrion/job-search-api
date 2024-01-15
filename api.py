@@ -20,7 +20,7 @@ app = FastAPI()
 
 @app.get("/job-options/")
 async def job_options(title: str):
-    n = 10
+    n = 5
     job_ids = search_jobs(title=title)
     # find 10 reandom job ids
     random.shuffle(job_ids)
