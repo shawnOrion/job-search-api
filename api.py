@@ -16,16 +16,26 @@ headers = {
 }
 
 app = FastAPI()
-# create endpoint to retrieve job profile with title
 
 
-@app.get("/job/")
-async def get_job(title: str):
+@app.get("/job-options/")
+async def job_options(title: str):
+    n = 10
     job_ids = search_jobs(title=title)
-    random_number = random.randint(0, len(job_ids) - 1)
-    job_id = job_ids[random_number]
+    job_ids = job_ids[:n]
+    job_profiles = []
+    for job_id in job_ids:
+        job_profile = collect_job(job_id)
+        job_profiles.append(job_profile)
+    print("returning job profiles")
+    return {"jobs": job_profiles}
+
+
+@app.get("/job-profile/")
+async def job_profile(job_id: int):
     job_profile = collect_job(job_id)
     print(json.dumps(job_profile, indent=4, sort_keys=True))
+    print("returning job profile")
     return {"job": job_profile}
 
 
