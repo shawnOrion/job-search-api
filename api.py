@@ -140,7 +140,7 @@ def text_to_html(text):
                 "content": text
             }
         ],
-        model="gpt-4-1106-preview"
+        model="gpt-3.5-turbo-1106"
     )
     html = chat_completion.choices[0].message.content
 
